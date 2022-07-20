@@ -21,6 +21,6 @@ class UserRepository {
   }
 
   Future<void> doLogout() async {
-    _secureStorage.delete(apiKey);
+    _secureStorage.delete(sessionToken);
   }
 }

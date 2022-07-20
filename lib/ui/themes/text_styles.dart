@@ -22,6 +22,6 @@ const textStandard = TextStyle(
 
 const textSmall = TextStyle(
   fontFamily: fontFamily,
-  fontWeight: FontWeight.w200,
+  fontWeight: FontWeight.w300,
   fontSize: 12,
 );

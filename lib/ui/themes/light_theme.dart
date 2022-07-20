@@ -11,7 +11,7 @@ ThemeData lightTheme = ThemeData(
       foregroundColor: Colors.white,
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: Colors.blueAccent.shade700,
+      backgroundColor: Colors.grey.shade300,
     ),
     iconTheme: const IconThemeData(
       color: Colors.blueAccent,

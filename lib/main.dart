@@ -14,8 +14,6 @@ import 'package:path_provider/path_provider.dart';
 Future<void> main() async {
   await dotenv.load();
 
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-
   final storage = await HydratedStorage.build(
     storageDirectory: await getApplicationSupportDirectory(),
   );

@@ -6,8 +6,8 @@ class HomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Home")),
-      body: Text("SJSJSJ"),
+      appBar: AppBar(title: const Text("Home")),
+      body: const Center(child: Text("Welcome to the Flutter Template!")),
     );
   }
 }

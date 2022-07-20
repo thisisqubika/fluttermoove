@@ -13,7 +13,7 @@ class BottomNavigation extends StatelessWidget {
     final theme = Theme.of(context);
     return SizedBox(
       child: BottomNavigationBar(
-        fixedColor: Colors.white,
+        fixedColor: theme.primaryColor,
         backgroundColor: theme.bottomNavigationBarTheme.backgroundColor,
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
@@ -22,7 +22,7 @@ class BottomNavigation extends StatelessWidget {
             label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
+            icon: Icon(Icons.person),
             label: "Profile",
           ),
         ],

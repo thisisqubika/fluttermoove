@@ -12,15 +12,18 @@ class LoginCubit extends Cubit<LoginState> {
       : userRepository = repository,
         super(LoginInitial());
 
-  Future<void> login(String? email, String? password) async {
+  Future<void> login(String email, String password) async {
     try {
       emit(LoginLoading());
-      if (email == null || password == null) {
+      if (email.isEmpty || password.isEmpty) {
         emit(LoginFailure());
+        return;
       }
-      await userRepository.doLogin(email!, password!);
+      await userRepository.doLogin(email, password);
       User user = await userRepository.getUser();
-      emit(LoginSuccess(user));
+      Future.delayed(const Duration(seconds: 1), () {
+        emit(LoginSuccess(user));
+      });
     } catch (exception) {
       emit(LoginFailure());
     }
