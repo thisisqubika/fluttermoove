@@ -4,6 +4,7 @@ import 'package:flutter_template/bloc/login/login_cubit.dart';
 import 'package:flutter_template/ui/components/button.dart';
 import 'package:flutter_template/ui/screens/home/home_navigator.dart';
 import 'package:flutter_template/ui/themes/text_styles.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key}) : super(key: key);
@@ -37,8 +38,10 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final locale = AppLocalizations.of(context)!;
+
     return Scaffold(
-        appBar: AppBar(title: const Text('Flutter Template')),
+        appBar: AppBar(title: Text(locale.loginTitle)),
         body: BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
           if (state is LoginSuccess) {
             handleLoginSuccess(context);
@@ -56,29 +59,29 @@ class _LoginWidgetState extends State<LoginWidget> {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              const Text("Email", style: textH5),
+                              Text(locale.email, style: textH5),
                               const SizedBox(height: 5),
                               TextField(
                                 controller: emailController,
-                                decoration: const InputDecoration(
-                                    hintStyle: TextStyle(fontSize: 16),
-                                    border: OutlineInputBorder(
+                                decoration: InputDecoration(
+                                    hintStyle: const TextStyle(fontSize: 16),
+                                    border: const OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(16))),
-                                    hintText: "Write your email address"),
+                                    hintText: locale.emailPlaceholder),
                                 style: textInput,
                               ),
                               const SizedBox(height: 15),
-                              const Text("Password", style: textH5),
+                              Text(locale.password, style: textH5),
                               const SizedBox(height: 5),
                               TextField(
                                 controller: passwordController,
-                                decoration: const InputDecoration(
-                                    hintStyle: TextStyle(fontSize: 16),
-                                    border: OutlineInputBorder(
+                                decoration: InputDecoration(
+                                    hintStyle: const TextStyle(fontSize: 16),
+                                    border: const OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(16))),
-                                    hintText: "Write your password"),
+                                    hintText: locale.password),
                                 style: textInput,
                                 obscureText: true,
                               ),
@@ -87,11 +90,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                   Column(
                     children: [
                       if (state is LoginFailure)
-                        const Text("Please write an email and a password",
-                            style: textSmall),
+                        Text(locale.loginError, style: textSmall),
                       Button(
                           isLoading: state is LoginLoading,
-                          text: "Log in",
+                          text: locale.login,
                           onPressed: () => handleLogin(context)),
                     ],
                   ),

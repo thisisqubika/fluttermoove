@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_template/constants/l10n/localizations.dart';
 import 'package:flutter_template/data/repositories/user_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_template/bloc/login/login_cubit.dart';
@@ -59,9 +60,9 @@ class FlutterTemplateApp extends StatelessWidget {
             theme: lightTheme,
             darkTheme: darkTheme,
             themeMode: ThemeMode.light,
-            // localizationsDelegates: localizationDelegates,
-            // supportedLocales: locales,
-            // locale: const Locale('en', ''),
+            localizationsDelegates: localizationDelegates,
+            supportedLocales: supportedLocales,
+            locale: currentLanguage,
           )),
     );
   }
