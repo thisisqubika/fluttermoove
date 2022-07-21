@@ -37,5 +37,9 @@ This project is a powerful Flutter starter template that aims to bootstrap the d
 4. Run `flutter pub get` and `npx pod-install ios`.
 5. Run `flutter run`
 
+## 📷 Screenshots
+| ![]( https://sp-flutter-template.s3.amazonaws.com/1.png ) | ![]( https://sp-flutter-template.s3.amazonaws.com/2.png ) | ![]( https://sp-flutter-template.s3.amazonaws.com/3.png ) | ![]( https://sp-flutter-template.s3.amazonaws.com/4.png ) |   |
+|-----------------------------------------------------------|-----------------------------------------------------------|-----------------------------------------------------------|-----------------------------------------------------------|---|
+
 ## 🚧 Contributions
 This is the first version of the Flutter template, and we plan to actively maintain it and keeping it updated. There's always room for improvement, and you can be a key part of it. Feel free to create a Pull Request with any contribution that you find suitable. It will be very much appreciated.
