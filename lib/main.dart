@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/constants/l10n/localizations.dart';
 import 'package:flutter_template/data/repositories/user_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,16 +55,20 @@ class FlutterTemplateApp extends StatelessWidget {
                 create: (context) =>
                     LoginCubit(repository: context.read<UserRepository>())),
           ],
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            onGenerateRoute: appRouter.onGenerateRoute,
-            theme: lightTheme,
-            darkTheme: darkTheme,
-            themeMode: ThemeMode.light,
-            localizationsDelegates: localizationDelegates,
-            supportedLocales: supportedLocales,
-            locale: currentLanguage,
-          )),
+          child: ScreenUtilInit(
+              designSize: const Size(360, 690),
+              builder: (BuildContext context, Widget? child) {
+                return MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  onGenerateRoute: appRouter.onGenerateRoute,
+                  theme: lightTheme,
+                  darkTheme: darkTheme,
+                  themeMode: ThemeMode.light,
+                  localizationsDelegates: localizationDelegates,
+                  supportedLocales: supportedLocales,
+                  locale: currentLanguage,
+                );
+              })),
     );
   }
 }
