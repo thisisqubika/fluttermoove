@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/ui/themes/text_styles.dart';
 
+Color brandingPrimaryColor = const Color(0xff0a0a36);
+
 ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    primaryColor: Colors.blueAccent.shade700,
+    primaryColor: brandingPrimaryColor,
     primaryColorDark: Colors.blueAccent,
     primaryColorLight: Colors.lightBlueAccent,
     disabledColor: Colors.blueGrey,

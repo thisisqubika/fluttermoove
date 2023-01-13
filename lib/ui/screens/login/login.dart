@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_template/bloc/login/login_cubit.dart';
+import 'package:flutter_template/constants/assets.dart';
 import 'package:flutter_template/ui/components/button.dart';
 import 'package:flutter_template/ui/screens/home/home_navigator.dart';
 import 'package:flutter_template/ui/themes/text_styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key}) : super(key: key);
@@ -48,6 +51,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
 
     return Scaffold(
         appBar: AppBar(title: Text(locale.loginTitle)),
@@ -57,11 +61,15 @@ class _LoginWidgetState extends State<LoginWidget> {
           }
         }, builder: (context, state) {
           return Container(
-            padding: const EdgeInsets.all(30),
+            padding: EdgeInsets.all(20.h),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(height: 0),
+                  Padding(
+                    padding: EdgeInsets.only(top: 40.h),
+                    child: SvgPicture.asset(logoSvgFilePath,
+                        height: 60.h, width: 60.h, color: theme.primaryColor),
+                  ),
                   Column(children: [
                     Form(
                         key: _formKey,

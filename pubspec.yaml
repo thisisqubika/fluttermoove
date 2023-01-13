@@ -52,6 +52,7 @@ dependencies:
   simple_animations: ^4.2.0
   bloc_test: ^9.1.0
   mocktail: ^0.3.0
+  flutter_screenutil: ^5.6.0
 
 dev_dependencies:
   flutter_test:
