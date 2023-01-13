@@ -18,10 +18,19 @@ class _LoginWidgetState extends State<LoginWidget> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  bool emptyFieldsError = false;
+
   void handleLogin(BuildContext context) {
-    context
-        .read<LoginCubit>()
-        .login(emailController.text, passwordController.text);
+    bool areFieldsEmpty =
+        emailController.text.isEmpty || passwordController.text.isEmpty;
+
+    setState(() => emptyFieldsError = areFieldsEmpty);
+
+    if (!areFieldsEmpty) {
+      context
+          .read<LoginCubit>()
+          .login(emailController.text, passwordController.text);
+    }
   }
 
   void handleLoginSuccess(BuildContext context) {
@@ -81,7 +90,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     border: const OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(16))),
-                                    hintText: locale.password),
+                                    hintText: locale.passwordPlaceholder),
                                 style: textInput,
                                 obscureText: true,
                               ),
@@ -91,6 +100,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                     children: [
                       if (state is LoginFailure)
                         Text(locale.loginError, style: textSmall),
+                      if (emptyFieldsError)
+                        Text(locale.emptyFieldsError, style: textSmall),
                       Button(
                           isLoading: state is LoginLoading,
                           text: locale.login,

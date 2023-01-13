@@ -15,10 +15,6 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> login(String email, String password) async {
     try {
       emit(LoginLoading());
-      if (email.isEmpty || password.isEmpty) {
-        emit(LoginFailure());
-        return;
-      }
       await userRepository.doLogin(email, password);
       User user = await userRepository.getUser();
       Future.delayed(const Duration(seconds: 1), () {

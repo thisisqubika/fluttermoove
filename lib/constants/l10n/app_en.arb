@@ -10,5 +10,6 @@
     "password": "Password",
     "passwordPlaceholder": "Write your password",
     "login": "Log in",
-    "loginError": "Please write an email and a password"
+    "loginError": "The entered credentials are incorrect",
+    "emptyFieldsError": "Please write an email and a password"
 }
