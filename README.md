@@ -1,12 +1,8 @@
 <br>
 <br>
-<p align="center"> 
-
-  <img src="https://media-exp1.licdn.com/dms/image/C4D0BAQEU4y571j_M9w/company-logo_200_200/0/1654631302030?e=2147483647&v=beta&t=BsvDC8hQex8mbeHd23So2Skx8p2Gu6EyUlDXFdoyBj0" alt="sebastianpaz" height="200" />
-     <img src="https://codigoonclick.com/wp-content/uploads/2019/07/flutter-introducci%C3%B3n.jpg" alt="sebastianpaz" height="200" />
-  <img src="https://media-exp1.licdn.com/dms/image/C4D0BAQEU4y571j_M9w/company-logo_200_200/0/1654631302030?e=2147483647&v=beta&t=BsvDC8hQex8mbeHd23So2Skx8p2Gu6EyUlDXFdoyBj0" alt="sebastianpaz" height="200" />
+<p align="center">  
+  <img src="https://sp-flutter-template.s3.amazonaws.com/header.png" alt="sebastianpaz" width="900"   />
 </p>
-
 
 <h1 align="center">Flutter Boilerplate Template</h1>
 <h3 align="center">A solid and easy-to-use template to quickstart your next Flutter project</h3>
@@ -40,8 +36,7 @@ This project is a powerful Flutter boilerplate project that aims to bootstrap th
 6. _(Optional):_ Rename your project using the [rename](https://pub.dev/packages/rename) package.
 
 ## 📷 Screenshots
-| ![]( https://sp-flutter-template.s3.amazonaws.com/1.png ) | ![]( https://sp-flutter-template.s3.amazonaws.com/2.png ) | ![]( https://sp-flutter-template.s3.amazonaws.com/3.png ) | ![]( https://sp-flutter-template.s3.amazonaws.com/4.png ) |   |
-|-----------------------------------------------------------|-----------------------------------------------------------|-----------------------------------------------------------|-----------------------------------------------------------|---|
+![]( https://sp-flutter-template.s3.amazonaws.com/screens.png )
 
 ## 🚧 Contributions
 This is the first version of the Flutter template, and we plan to actively maintain it and keeping it updated. There's always room for improvement, and you can be a key part of it. Feel free to create a Pull Request with any contribution that you find suitable. It will be very much appreciated.
