@@ -1,11 +1,12 @@
-import 'package:flutter_template/data/secure_storage.dart';
 import 'package:flutter_template/constants/storage.dart';
 import 'package:flutter_template/data/models/user.dart';
 import 'package:flutter_template/data/network/http_client.dart';
+import 'package:flutter_template/main.dart';
+import 'package:flutter_template/services/secure_storage.dart';
 
 class UserRepository {
-  final HttpClient _httpClient = HttpClient();
-  final SecureStorage _secureStorage = SecureStorage();
+  final HttpClient _httpClient = getIt<HttpClient>();
+  final SecureStorage _secureStorage = getIt<SecureStorage>();
 
   Future<String> doLogin(String email, String password) async {
     String jwtResponse = '1234';

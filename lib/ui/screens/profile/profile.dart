@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/bloc/login/login_cubit.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_template/providers/login/login_provider.dart';
 import 'package:flutter_template/ui/components/button.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_template/ui/screens/login/login.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ProfileWidget extends StatelessWidget {
+class ProfileWidget extends ConsumerStatefulWidget {
   const ProfileWidget({Key? key}) : super(key: key);
+
+  @override
+  ConsumerState<ProfileWidget> createState() => _ProfileWidgetState();
+}
+
+class _ProfileWidgetState extends ConsumerState<ProfileWidget> {
+  void handleLogout() {
+    ref.read(loginProvider.notifier).logout();
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (ctx) => const LoginWidget()));
+  }
 
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
-
-    void handleLogout() {
-      context.read<LoginCubit>().logout();
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (ctx) => const LoginWidget()));
-    }
 
     return Scaffold(
       appBar: AppBar(title: Text(locale.profile)),

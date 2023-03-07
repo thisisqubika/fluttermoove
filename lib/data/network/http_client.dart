@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:flutter_template/data/storage/secure_storage.dart';
+import 'package:flutter_template/services/secure_storage.dart';
 import 'package:flutter_template/constants/env_config.dart';
 import 'package:flutter_template/constants/storage.dart';
 import 'package:flutter_template/data/network/network_exceptions.dart';
