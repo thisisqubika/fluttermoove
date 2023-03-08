@@ -7,12 +7,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/constants/l10n/localizations.dart';
 import 'package:flutter_template/data/network/http_client.dart';
-import 'package:flutter_template/data/repositories/user_repository.dart';
 import 'package:flutter_template/services/secure_storage.dart';
 import 'package:flutter_template/ui/router/routes.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_template/ui/themes/dark_theme.dart';
 import 'package:flutter_template/ui/themes/light_theme.dart';
+import 'package:flutter_template/data/repositories/user_repository.dart';
+import 'package:flutter_template/data/repositories/interfaces/i_user_repository.dart';
 
 Future<void> main() async {
   await dotenv.load();
@@ -35,13 +36,13 @@ Future<void> main() async {
 }
 
 final getIt = GetIt.instance;
-_injectServices() async {
-  // Initialize repositories
-  getIt.registerSingleton<UserRepository>(UserRepository());
-
+_injectServices() {
   // Initialize services
-  getIt.registerSingleton<HttpClient>(HttpClient());
   getIt.registerSingleton<SecureStorage>(SecureStorage());
+  getIt.registerSingleton<HttpClient>(HttpClient());
+
+  // Initialize repositories
+  getIt.registerSingleton<IUserRepository>(UserRepository());
 }
 
 class FlutterTemplateApp extends StatelessWidget {

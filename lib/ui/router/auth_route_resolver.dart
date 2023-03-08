@@ -1,8 +1,6 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/services/secure_storage.dart';
 import 'package:flutter_template/constants/storage.dart';
-import 'package:flutter_template/data/models/user.dart';
 import 'package:flutter_template/ui/screens/home/home_navigator.dart';
 import 'package:flutter_template/ui/screens/login/login.dart';
 
@@ -24,13 +22,14 @@ class _AuthRouteResolverWidgetState extends State<AuthRouteResolverWidget> {
     loadUser();
   }
 
+  // Handler function that parses the jwt token and redirects user
+  // to one screen or another based on the login status.
   void loadUser() async {
-    final jsonUser = await _secureStorage.read(sessionToken);
+    String? token = await _secureStorage.read(sessionToken);
     try {
-      User.fromJson(json.decode(jsonUser));
-      setState(() {
-        userLoggedIn = true;
-      });
+      if (token != null) {
+        setState(() => userLoggedIn = true);
+      }
     } catch (_) {
       return null;
     }

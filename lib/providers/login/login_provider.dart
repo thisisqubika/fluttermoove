@@ -1,17 +1,17 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_template/data/models/user.dart';
-import 'package:flutter_template/data/repositories/user_repository.dart';
+import 'package:flutter_template/data/repositories/interfaces/i_user_repository.dart';
 import 'package:flutter_template/main.dart';
 import 'package:flutter_template/providers/login/login_state.dart';
 
 final loginProvider =
     StateNotifierProvider<UserStateNotifier, LoginState>((ref) {
-  UserRepository userRepository = getIt<UserRepository>();
+  IUserRepository userRepository = getIt<IUserRepository>();
   return UserStateNotifier(userRepository);
 });
 
 class UserStateNotifier extends StateNotifier<LoginState> {
-  final UserRepository _userRepository;
+  final IUserRepository _userRepository;
 
   UserStateNotifier(
     this._userRepository,

@@ -7,13 +7,9 @@ class SecureStorage {
     await _storage.write(key: key, value: value);
   }
 
-  Future<String> read(String key) async {
+  Future<String?> read(String key) async {
     String? value = await _storage.read(key: key);
-    if (value == null) {
-      return "null";
-    } else {
-      return value;
-    }
+    return value;
   }
 
   void delete(String key) {

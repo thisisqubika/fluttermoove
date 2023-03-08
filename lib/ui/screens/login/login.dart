@@ -53,7 +53,13 @@ class _LoginWidgetState extends ConsumerState<LoginWidget> {
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
-    final LoginState loginState = ref.read(loginProvider);
+    final LoginState loginState = ref.watch(loginProvider);
+
+    ref.listen<LoginState>(loginProvider, (LoginState? _, LoginState state) {
+      if (state.isUserAuthenticated) {
+        handleLoginSuccess(context);
+      }
+    });
 
     return Scaffold(
         appBar: AppBar(title: Text(locale.loginTitle)),
