@@ -1,24 +1,22 @@
+import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/constants/l10n/localizations.dart';
-import 'package:flutter_template/data/repositories/user_repository.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_template/bloc/login/login_cubit.dart';
+import 'package:flutter_template/data/network/http_client.dart';
+import 'package:flutter_template/services/secure_storage.dart';
 import 'package:flutter_template/ui/router/routes.dart';
 import 'package:flutter/services.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:flutter_template/ui/themes/dark_theme.dart';
 import 'package:flutter_template/ui/themes/light_theme.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:flutter_template/data/repositories/user_repository.dart';
+import 'package:flutter_template/data/repositories/interfaces/i_user_repository.dart';
 
 Future<void> main() async {
   await dotenv.load();
-
-  final storage = await HydratedStorage.build(
-    storageDirectory: await getApplicationSupportDirectory(),
-  );
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
@@ -26,12 +24,25 @@ Future<void> main() async {
 
   final sharedPreferences = await SharedPreferences.getInstance();
 
-  HydratedBlocOverrides.runZoned(
-      () => runApp(FlutterTemplateApp(
-            appRouter: AppRouter(),
-            sharedPreferences: sharedPreferences,
-          )),
-      storage: storage);
+  // Inject singletons
+  await _injectServices();
+
+  runApp(ProviderScope(
+      child: FlutterTemplateApp(
+    appRouter: AppRouter(),
+    sharedPreferences: sharedPreferences,
+  )));
+  FlutterNativeSplash.remove();
+}
+
+final getIt = GetIt.instance;
+_injectServices() {
+  // Initialize services
+  getIt.registerSingleton<SecureStorage>(SecureStorage());
+  getIt.registerSingleton<HttpClient>(HttpClient());
+
+  // Initialize repositories
+  getIt.registerSingleton<IUserRepository>(UserRepository());
 }
 
 class FlutterTemplateApp extends StatelessWidget {
@@ -44,31 +55,20 @@ class FlutterTemplateApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider<UserRepository>(
-            create: (context) => UserRepository()),
-      ],
-      child: MultiBlocProvider(
-          providers: [
-            BlocProvider<LoginCubit>(
-                create: (context) =>
-                    LoginCubit(repository: context.read<UserRepository>())),
-          ],
-          child: ScreenUtilInit(
-              designSize: const Size(360, 690),
-              builder: (BuildContext context, Widget? child) {
-                return MaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  onGenerateRoute: appRouter.onGenerateRoute,
-                  theme: lightTheme,
-                  darkTheme: darkTheme,
-                  themeMode: ThemeMode.light,
-                  localizationsDelegates: localizationDelegates,
-                  supportedLocales: supportedLocales,
-                  locale: currentLanguage,
-                );
-              })),
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      builder: (BuildContext context, Widget? child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: appRouter.onGenerateRoute,
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: ThemeMode.light,
+          localizationsDelegates: localizationDelegates,
+          supportedLocales: supportedLocales,
+          locale: currentLanguage,
+        );
+      },
     );
   }
 }

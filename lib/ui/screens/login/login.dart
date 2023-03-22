@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_template/bloc/login/login_cubit.dart';
 import 'package:flutter_template/constants/assets.dart';
+import 'package:flutter_template/providers/login/login_provider.dart';
+import 'package:flutter_template/providers/login/login_state.dart';
 import 'package:flutter_template/ui/components/button.dart';
 import 'package:flutter_template/ui/screens/home/home_navigator.dart';
 import 'package:flutter_template/ui/themes/text_styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginWidget extends StatefulWidget {
+class LoginWidget extends ConsumerStatefulWidget {
   const LoginWidget({Key? key}) : super(key: key);
 
   @override
-  State<LoginWidget> createState() => _LoginWidgetState();
+  ConsumerState<LoginWidget> createState() => _LoginWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _LoginWidgetState extends ConsumerState<LoginWidget> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -30,8 +31,8 @@ class _LoginWidgetState extends State<LoginWidget> {
     setState(() => emptyFieldsError = areFieldsEmpty);
 
     if (!areFieldsEmpty) {
-      context
-          .read<LoginCubit>()
+      ref
+          .read(loginProvider.notifier)
           .login(emailController.text, passwordController.text);
     }
   }
@@ -52,15 +53,17 @@ class _LoginWidgetState extends State<LoginWidget> {
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
+    final LoginState loginState = ref.watch(loginProvider);
+
+    ref.listen<LoginState>(loginProvider, (LoginState? _, LoginState state) {
+      if (state.isUserAuthenticated) {
+        handleLoginSuccess(context);
+      }
+    });
 
     return Scaffold(
         appBar: AppBar(title: Text(locale.loginTitle)),
-        body: BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
-          if (state is LoginSuccess) {
-            handleLoginSuccess(context);
-          }
-        }, builder: (context, state) {
-          return Container(
+        body: Container(
             padding: EdgeInsets.all(20.h),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -106,18 +109,16 @@ class _LoginWidgetState extends State<LoginWidget> {
                   ]),
                   Column(
                     children: [
-                      if (state is LoginFailure)
+                      if (loginState.error != null)
                         Text(locale.loginError, style: textSmall),
                       if (emptyFieldsError)
                         Text(locale.emptyFieldsError, style: textSmall),
                       Button(
-                          isLoading: state is LoginLoading,
+                          isLoading: loginState.isLoading,
                           text: locale.login,
                           onPressed: () => handleLogin(context)),
                     ],
                   ),
-                ]),
-          );
-        }));
+                ])));
   }
 }

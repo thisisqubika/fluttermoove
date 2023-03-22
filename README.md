@@ -9,7 +9,9 @@
 
 
 ## ⚡ Introduction
-This project is a powerful Flutter boilerplate project that aims to bootstrap the development of your mobile application. This boilerplate project comes with a few built-in components, and a clean and organized folder structure for getting a quick ramp up on your Flutter application. We are constantly maintaining this project and contributions are well accepted.
+FlutterMoove is a powerful Flutter boilerplate, created by Moove It, that provides the basis for rapidly bootstrapping the development of your mobile application.
+For typical applications, by using FlutterMoove, you can significantly reduce the time to start a project – and ultimately the time it’ll take a business to see an app go live. 
+This is because we already have a tested starting point. This means we have aspects such as the libraries defined and the folder structure already established.
 
 ## ⭐ What's inside
 - Built with the latest major version of Flutter (and we'll keep it updated!)
@@ -21,9 +23,9 @@ This project is a powerful Flutter boilerplate project that aims to bootstrap th
   <a href="https://github.com/moove-it/flutter-template/actions"><img height="15" src="https://github.com/moove-it/flutter-template/actions/workflows/tests.yml/badge.svg" alt="Build Status">
   </a> 
 ### Business Logic and Data.
-- Layered pattern structure with Repository Pattern for data management
-- BLoC-driven architecture 🔥 for a solid state management with BLoCs and Cubits
-- Supports persistence and offline usage with HydratedBLoC
+- Dependency Injection with GetIt
+- Layered pattern structure with Repository Pattern for efficient data management
+- Simple and powerful state management with Riverpod (examples included!)
 - Provides secure storage for sensitive data
 - Provides key-pair value storage for user preferences
 
@@ -39,4 +41,4 @@ This project is a powerful Flutter boilerplate project that aims to bootstrap th
 ![]( https://sp-flutter-template.s3.amazonaws.com/screens.png )
 
 ## 🚧 Contributions
-This is the first version of the Flutter template, and we plan to actively maintain it and keeping it updated. There's always room for improvement, and you can be a key part of it. Feel free to create a Pull Request with any contribution that you find suitable. It will be very much appreciated.
+We plan to actively maintain this template. We believe there's always room for improvement, and you can be a key part of it. Feel free to create a Pull Request with any contribution that you find suitable. It will be very much appreciated.
